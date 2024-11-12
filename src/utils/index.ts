@@ -1,4 +1,5 @@
 import axios, { AxiosHeaders, AxiosRequestConfig } from 'axios';
+// @ts-ignore
 import CryptoJS from 'crypto-js';
 import { store } from '../redux/store';
 import { removeUser } from '@/redux/reducers/user';
@@ -72,7 +73,7 @@ export const getAllBooks = async (title?: string): Promise<void> => {
       useAuthHeaders: true,
     } as CustomAxiosRequestConfig);
     if (title) {
-      let formedBooks = response.data.data?.map(bk => {
+      let formedBooks = response.data.data?.map((bk: any) => {
         return { book: bk, status: 0 };
       });
       store.dispatch(setBooks(formedBooks));
