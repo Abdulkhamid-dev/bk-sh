@@ -1,18 +1,35 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+import { persistReducer, persistStore } from 'redux-persist';
 
-import testReducer from './reducers/test'
+import userReducer from '../redux/reducers/user';
+import settingsReducer from '../redux/reducers/settingSlice';
+import boooksReducer from '../redux/reducers/bookSlice';
 
-export const store = configureStore({
-  reducer: {
-    test: testReducer,
-  },
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['user'],
+};
+
+const rootReducer = combineReducers({
+  user: userReducer,
+  settings: settingsReducer,
+  books: boooksReducer,
 });
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>;
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch;
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
+      },
+    }),
+});
+
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
+export const persistor = persistStore(store);

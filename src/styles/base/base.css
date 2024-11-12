@@ -58,3 +58,7 @@ body {
   background-color: var(--bg-grey);
 }
 
+/* // MUI customizations */
+.Mui-disabled{
+  color: #fff3 !important;
+}

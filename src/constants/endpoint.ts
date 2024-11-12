@@ -4,10 +4,12 @@ const ENDPOINT = {
   TEST: `${API_BASE_URL}/test`,
 } as const;
 
-export const ROUTES = {
-  APP_ROOT: '/',
+export const AUTH_ROUTES = {
   SIGNUP: '/signup',
-  LOGIN: '/login',
+  LOGIN: '/',
+} as const;
+export const MAIN_ROUTES = {
+  ROOT: '/',
 } as const;
 
 export default ENDPOINT;

@@ -1,10 +1,8 @@
-import AppLayout from '@/layout/AppLayout';
+import Dashboard from "@/pages/dashboard/Dashboard"
 
 function App() {
   return (
-    <AppLayout>
-      <h1>Vitejs + React + TypeScript + Rudux Thunk + Material UI Boilerplate</h1>
-    </AppLayout>
+    <Dashboard/>
   )
 }
 

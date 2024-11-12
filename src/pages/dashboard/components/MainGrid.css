@@ -1,0 +1,10 @@
+.books-main {
+    width: 100%;
+    padding: 25px;
+}
+.books-wrapper {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
