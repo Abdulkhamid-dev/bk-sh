@@ -43,13 +43,13 @@ export default function AppTheme({
             ...surfacesCustomizations,
             ...themeComponents,
           },
-        });
+        } as ThemeOptions);
   }, [disableCustomTheme, themeComponents]);
   if (disableCustomTheme) {
     return <React.Fragment>{children}</React.Fragment>;
   }
   return (
-    <ThemeProvider theme={theme} disableTransitionOnChange>
+    <ThemeProvider theme={theme}>
       {children}
     </ThemeProvider>
   );
